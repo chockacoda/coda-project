@@ -1,0 +1,28 @@
+
+
+<mat-card *ngFor="let data of getMenuData()">
+  <mat-card-header>
+     <mat-card-title style="font-size: 20px;">{{data.movie_name}}</mat-card-title> 
+     <div class="form-group">
+      <ngb-rating [formControl]="ctrl" max=5 rate="current_rate"></ngb-rating>
+      <div class="form-text small">
+        <div *ngIf="ctrl.valid" class="text-success">Thanks!</div>
+        <div *ngIf="ctrl.invalid" class="text-danger">Please rate us</div>
+      </div>
+    </div>
+  </mat-card-header>
+   <mat-card-content *ngIf="!collapsed">
+      <p>
+         Movie Crew:{{data.movie_crew}}
+      </p>
+      <p>
+         Movie Genre:{{data.movie_genre}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions >
+       <button mat-button  class="btn btn-default btn-xs" (click)="collapsed=false">OPEN DETAIL</button>
+       <button mat-button (click)="collapsed=true">CLOSE DETAIL</button>
+       <button class="btn btn-default btn-xs" >LIKE</button>
+       <button mat-button >COMMENT</button>
+    </mat-card-actions>
+ </mat-card>
