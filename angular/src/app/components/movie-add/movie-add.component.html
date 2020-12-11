@@ -1,0 +1,56 @@
+<div id="addMovie" *ngIf="displayAddMovie">
+  <form [formGroup]="formGroup" novalidate (ngSubmit)="addMovie()">
+    <table>
+      <tr>
+        <td colspan="2">
+          <mat-form-field>
+            <input formControlName="movie_name" matInput placeholder="Movie name">
+          </mat-form-field>
+          <mat-error>
+            <span *ngIf="!formGroup.get('movie_name').valid && formGroup.get('movie_name').touched">Please enter Movie name
+              </span>
+          </mat-error>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <mat-form-field>
+            <input formControlName="movie_crew" matInput placeholder="Movie crew">
+          </mat-form-field>
+          <mat-error>
+            <span *ngIf="!formGroup.get('movie_crew').valid && formGroup.get('movie_crew').touched">Please enter Movie crew
+            </span>
+          </mat-error>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <mat-form-field>
+            <mat-label>Movie genre</mat-label>
+            <mat-select formControlName="movie_genre">
+              <mat-option value="ANIMATION">ANIMATION</mat-option>
+              <mat-option value="ACTION">ACTION</mat-option>
+              <mat-option value="DRAMA">DRAMA</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-error>
+            <span *ngIf="!formGroup.get('movie_genre').valid && formGroup.get('movie_genre').touched">Please enter movie crew</span>
+          </mat-error>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" class="content-center">
+          <button mat-raised-button color="accent" [disabled]="!formGroup.valid" (onClick)="addMovie($event)">Submit</button>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <p-button class="btnAdd" label="BACK" (onClick)="goBack()"></p-button>
+
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+      </tr>
+    </table>
+  </form>
+  <br>
+</div>

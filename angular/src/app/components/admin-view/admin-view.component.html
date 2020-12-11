@@ -1,0 +1,70 @@
+<div id="list" *ngIf="displayMovieList">
+  <p-table [columns]="cols" [value]="movies" sortField="status" sortMode="single" [paginator]="true" [rows]="5"
+    [globalFilterFields]="['movie_crew','menu_genre']" dataKey="name" editMode="row">
+    <ng-template pTemplate="caption">
+      List of Movie Review
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+          {{col.header}}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-movie let-editing="editing" let-ri="rowIndex">
+
+      <tr [pEditableRow]="movie">
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="movie.movie_name">
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{movie.movie_name}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="movie.movie_crew">
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{movie.movie_crew}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <p-dropdown [options]="statusValues" [(ngModel)]="movie.movie_genre" [style]="{'width':'100%'}"></p-dropdown>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{movie.movie_genre}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td style="text-align:center">
+          <p-button class="btnAdd" icon="pi pi-trash" class="ui-button-info" (onClick)="deleteMovie(movie.movie_id)"></p-button>
+          &nbsp;&nbsp;&nbsp;
+          <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil" class="ui-button-info"
+            (click)="onRowEditInit(movie)"></button>
+          <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check" class="ui-button-success"
+            style="margin-right: .5em" (click)="onRowEditSave(movie)"></button>
+          <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times" class="ui-button-danger"
+            (click)="onRowEditCancel(movie, ri)"></button>
+
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="summary">
+      There are {{movies?.length}} MOVIES
+    </ng-template>
+
+  </p-table>
+</div>
+<movie-add *ngIf="displayMovieAdd" (valueChange)='hideMovieAdd($event)'></movie-add>
+<!-- <router-outlet></router-outlet> -->

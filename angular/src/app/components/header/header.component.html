@@ -1,0 +1,15 @@
+<header>
+  <nav class ="navbar navbar-expand-md navbar-dark bg-dark">
+  <div><a class="navbar-brand">movie review</a></div>
+  
+  <ul class="navbar-nav">
+    <li><a *ngIf="loginService.isUserLoggedIn()&& loginService.isAdmin()" routerLink="/movie-list" class="nav-link">View Movie</a></li>
+    <li><a *ngIf="loginService.isUserLoggedIn()&& loginService.isUser()" routerLink="/user-view" class="nav-link">View Movie</a></li>
+    <li><a *ngIf="loginService.isUserLoggedIn() && loginService.isAdmin()" routerLink="/movie-add" class="nav-link">add Movie</a></li>
+    <li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" class="nav-link">Login</a></li>
+    <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="nav-link">LogOut</a></li>
+  </ul>
+  
+  </nav>
+  
+  </header>
