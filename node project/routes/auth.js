@@ -5,7 +5,11 @@ const userController = require('../controllers/user.controller');
 
 router.post('/login', userController.login);
 
-router.get('/getMovieList', loggedIn,userController.getMovieList);
+router.get('/usernameCheckUnique/:id',userController.usernameCheckUnique);
+
+router.post('/register', userController.register);
+
+router.get('/getMovieList/:id', loggedIn,userController.getMovieList);
 
 router.get('/getMovieById/:id',loggedIn,userController.getMovieById);
 
@@ -35,6 +39,6 @@ router.delete('/deleteMovie/:id',loggedIn,adminOnly,userController.deleteMovie);
 //     });
 //   });
 
-  router.get('/getAverageRating/:id',loggedIn,userController.averageRating);
+  router.post('/getAverageRating',loggedIn,userController.averageRating);
     
 module.exports = router;

@@ -24,6 +24,8 @@ import { adminViewComponent } from './components/admin-view/admin-view.component
 import { MovieEditComponent } from './components/movie-edit/movie-edit.component';
 import { MovieAddComponent } from './components/movie-add/movie-add.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RatingModule } from 'primeng/primeng';
+import { RegisterComponent } from './components/registeration/register.component';
  
 
 @NgModule({
@@ -33,6 +35,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MovieAddComponent,
     MovieEditComponent,
     LoginComponent,
+    RegisterComponent,
     LogoutComponent,
     HeaderComponent,
     UserViewComponent,
@@ -46,6 +49,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
+    RatingModule,
     MatCardModule, 
     MatButtonModule,
     FormsModule,

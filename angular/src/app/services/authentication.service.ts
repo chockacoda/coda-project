@@ -29,6 +29,7 @@ export class AuthenticationService {
      map(
        userData => {
         sessionStorage.setItem('username',username);
+        sessionStorage.setItem('userId',userData.user_id);
         let tokenStr= 'Bearer '+userData.token;
         sessionStorage.setItem('token', tokenStr);
         sessionStorage.setItem('auth',userData.role);

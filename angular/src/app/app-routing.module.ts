@@ -9,6 +9,7 @@ import { MovieEditComponent } from './components/movie-edit/movie-edit.component
 import { MovieAddComponent } from './components/movie-add/movie-add.component';
 import { AuthGaurdUserService } from './services/auth-user-gaurd.service';
 import { AuthLogoutGaurdService } from './services/auth-logout-gaurd.service';
+import { RegisterComponent } from './components/registeration/register.component';
 
 const routes: Routes = [
   { path: 'movie-list', component: adminViewComponent,canActivate:[AuthGaurdService] },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: '', component: LoginComponent},
   { path: 'user-view', component: UserViewComponent,canActivate:[AuthGaurdUserService] ,data:{role: ["USER"]}},
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'logout', component: LogoutComponent,canActivate:[AuthLogoutGaurdService] }
 ];
 
