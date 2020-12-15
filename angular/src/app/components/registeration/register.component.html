@@ -1,0 +1,54 @@
+<div id="reigster" *ngIf="onRegister">
+  <form [formGroup]="formGroup" novalidate (ngSubmit)="register()">
+    <table>
+      <tr>
+        <td colspan="2">
+          <mat-form-field>
+            <input formControlName="user_name" matInput placeholder="UserName" (change)="usernameCheckUnique()">
+          </mat-form-field>
+          <mat-error>
+              <span *ngIf="formGroup.get('user_name').invalid && formGroup.get('user_name').touched">
+                  Username is required.
+                </span>
+              <span *ngIf="userIdAlredyExist != ''" class="alert alert-danger">
+                {{userIdAlredyExist}} 
+              </span>   
+          </mat-error>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <mat-form-field>
+            <input type="password" formControlName="password" matInput placeholder="Password">
+          </mat-form-field>
+          <mat-error>
+            <span *ngIf="!formGroup.get('password').valid && formGroup.get('password').touched">Please enter password
+            </span>
+          </mat-error>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <mat-form-field>
+            <input type="email" formControlName="email" matInput placeholder="Email id">
+          </mat-form-field>
+          <mat-error>
+            <span *ngIf="!formGroup.get('email').valid && formGroup.get('email').touched">Please enter email</span>
+          </mat-error>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" class="content-center">
+          <button mat-raised-button color="accent" [disabled]="!formGroup.valid" (onClick)="register($event)">Submit</button>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <p-button class="btnAdd" label="BACK" (onClick)="goBack()"></p-button>
+
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+      </tr>
+    </table>
+  </form>
+  <br>
+</div>

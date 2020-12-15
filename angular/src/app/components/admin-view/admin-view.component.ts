@@ -34,7 +34,7 @@ export class adminViewComponent implements OnInit {
     this.displayMovieAdd = false;
     this.displayMovieEdit = false;
 
-    this.getMovieList().subscribe((data) => { this.movies = data });
+    this.getMovieList(sessionStorage.getItem('userId')).subscribe((data) => { this.movies = data });
 
     this.cols = [
       { field: 'movie_name', header: 'Movie Name' },
@@ -55,8 +55,8 @@ export class adminViewComponent implements OnInit {
   /**
    this method is used for getting list of movies.
   */
-  getMovieList() {
-    return this.movieService.getMovieList();
+  getMovieList(id) {
+    return this.movieService.getMovieList(id);
   }
 
   
@@ -85,7 +85,7 @@ export class adminViewComponent implements OnInit {
       console.log("success");
       this.notifier.notify("success", "Movie deleted successfully!!");
     });
-    this.getMovieList().subscribe((data) => { this.movies = data });
+    this.getMovieList(sessionStorage.getItem('userId')).subscribe((data) => { this.movies = data });
   }
 
   /**

@@ -5,6 +5,7 @@ import { NotifierService } from 'angular-notifier';
 import {  Movie } from 'src/app/domain/Movie';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { FormControl, Validators } from '@angular/forms';
+import { Rating } from 'src/app/domain/individual-rating';
 
 @Component({
   selector: 'user-card',
@@ -14,8 +15,8 @@ import { FormControl, Validators } from '@angular/forms';
 export class UserViewComponent implements OnInit {
   ctrl = new FormControl(null, Validators.required);
   movies: Movie[];
+  rating:Rating={};
   collapsed:boolean=true;
-  current_rate;
   constructor(private movieService: MovieService,private loginservice:AuthenticationService, private router: Router, private notifier: NotifierService) {
   }
 
@@ -24,29 +25,34 @@ export class UserViewComponent implements OnInit {
   */
   ngOnInit() {
     if(this.loginservice.isUser){
-    
-    this.getMovieList().subscribe((data) => {
+    this.getMovieList(sessionStorage.getItem('userId')).subscribe((data) => {
        this.movies = data;
-       this.movies.forEach(movie => {
-      this.current_rate=this.movieService.getRating(movie);
-       });
-      });
-  }
+  });
+}
 }
 
 /**
    getMovieList used to get the list.
   */
-  getMovieList() {
-    return this.movieService.getMovieList();
+  getMovieList(id) {
+    return this.movieService.getMovieList(id);
   }
 
   /**
-   getMenuData return the list of data.
+   getRating used to get the list.
   */
-  getMenuData() {
-  if(this.movies)
-     return this.movies;
-  }
+ getRating(user_id,movieid,star_rating) {
+   this.rating.user_id=user_id;
+   this.rating.movie_id=movieid;
+   this.rating.individual_rating=star_rating;
+  return this.movieService.getRating(this.rating).subscribe((data) => {
+    this.notifier.notify("success", "Rating saved successfully!!");
+    this.ngOnInit();
+  });
+}
+
+onRate(event,movieid){
+  this.getRating(sessionStorage.getItem('userId'),movieid,event.value);
+}
 
 }
